@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Eco Contribution Calculator</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e8f5e9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            width: 400px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: green;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 6px;
+        }
+
+        button:hover {
+            background: darkgreen;
+        }
+
+        #results {
+            display: none;
+            margin-top: 20px;
+            background: #f1f8e9;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .impact {
+            color: darkgreen;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .contribution {
+            color: #006400;
+            font-size: 22px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🌍 Eco Contribution Calculator</h1>
+
+    <label>Electricity Bill (DHS)</label>
+    <input type="number" id="electricity">
+
+    <label>Water Bill (DHS)</label>
+    <input type="number" id="water">
+
+    <label>Fuel Expenses (DHS)</label>
+    <input type="number" id="fuel">
+
+    <label>Bill Period (Months)</label>
+    <input type="number" id="months" placeholder="Example: 1, 3, 12">
+
+    <button onclick="calculateImpact()">
+        Calculate
+    </button>
+
+    <div id="results">
+
+        <p>
+            <strong>Monthly Eco Impact Score:</strong><br>
+            <span class="impact" id="score"></span>
+        </p>
+
+        <p>
+            <strong>Recommended Environmental Contribution:</strong><br>
+            <span class="contribution" id="contribution"></span> DHS 🌱
+        </p>
+
+        <p>
+            This contribution can support environmental
+            restoration and verified tree-planting programs.
+        </p>
+
+    </div>
+
+</div>
+
+<script>
+
+function calculateImpact() {
+
+    let electricity =
+        Number(document.getElementById("electricity").value) || 0;
+
+    let water =
+        Number(document.getElementById("water").value) || 0;
+
+    let fuel =
+        Number(document.getElementById("fuel").value) || 0;
+
+    let months =
+        Number(document.getElementById("months").value) || 1;
+
+    // Convert bills into monthly values
+    let monthlyElectricity = electricity / months;
+    let monthlyWater = water / months;
+    let monthlyFuel = fuel / months;
+
+    // Eco Score Formula
+    let impactScore =
+        (monthlyElectricity * 0.5) +
+        (monthlyWater * 0.2) +
+        (monthlyFuel * 1);
+
+    // Environmental Contribution
+    let contribution = impactScore * 0.2;
+
+    document.getElementById("score").textContent =
+        impactScore.toFixed(0);
+
+    document.getElementById("contribution").textContent =
+        contribution.toFixed(2);
+
+    document.getElementById("results").style.display =
+        "block";
+}
+
+</script>
+
+</body>
+</html>
